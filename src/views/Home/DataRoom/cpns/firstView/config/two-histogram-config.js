@@ -2,19 +2,13 @@ import { getAnimalProvinceLevel } from '@/utils/request.js'
 
 const getPrinceLevel = async () => {
   const { data } = await getAnimalProvinceLevel()
-  const keys = Object.keys(data)
+  const keys = Object.keys(data) //省份名称
   const values1 = [] //一级
   const values2 = [] //二级
-  const arrData = Array.from(Object.values(data), (x) => x) //这个转化还不太会是什么意思,好赶都来不及慢慢品尝了
-  // console.log(arrData)
-  for (let item of arrData) {
-    // 我开摆了,我不用 keys\values 去转化了,就中文 淦
-    values1.push(item.一级)
-    values2.push(item.二级)
-  }
-
-  // console.log(values1)
-  // console.log(values2)
+  keys.forEach((item) => {
+    values1.push(data[item].level1)
+    values2.push(data[item].level2)
+  })
 
   return {
     title: {
